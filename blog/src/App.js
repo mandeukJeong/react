@@ -52,6 +52,7 @@ function App() {
       >
         글추가
       </button>
+      <Modal2 />
       {modal === true ? <Modal index={index} title={title} /> : null}
     </div>
   );
@@ -65,6 +66,31 @@ function Modal(props) {
       <p>상세내용</p>
     </div>
   );
+}
+
+class Modal2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'minseo',
+      age: 25,
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        안녕 {this.state.name}
+        <button
+          onClick={() => {
+            this.setState({ age: 26 });
+          }}
+        >
+          버튼
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;

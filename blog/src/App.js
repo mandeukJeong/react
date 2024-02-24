@@ -9,6 +9,7 @@ function App() {
   ]);
   let [modal, setModal] = useState(false);
   let [index, setIndex] = useState(null);
+  let [value, setValue] = useState('');
 
   return (
     <div className="App">
@@ -28,10 +29,29 @@ function App() {
             >
               {item}
             </h4>
+            <button
+              onClick={() =>
+                setTitle((prevState) => {
+                  return prevState.filter((_, num) => num !== index);
+                })
+              }
+            >
+              삭제
+            </button>
             <p>2월 17일 발행</p>
           </div>
         );
       })}
+      <input onChange={(e) => setValue(e.target.value)} />
+      <button
+        onClick={() =>
+          setTitle((prevState) => {
+            return [...prevState, value];
+          })
+        }
+      >
+        글추가
+      </button>
       {modal === true ? <Modal index={index} title={title} /> : null}
     </div>
   );

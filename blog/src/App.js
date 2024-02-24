@@ -14,9 +14,9 @@ function App() {
       <div className="black-nav">
         <h4>ReactBlog</h4>
       </div>
-      {title.map((item) => {
+      {title.map((item, index) => {
         return (
-          <div className="list">
+          <div className="list" key={index}>
             <h4
               onClick={() => {
                 setModal((prevState) => {
@@ -30,17 +30,19 @@ function App() {
           </div>
         );
       })}
-      {modal === true ? <Modal /> : null}
+      {modal === true ? <Modal title={title} /> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
+  const [text, setText] = useState(props.title[0]);
   return (
     <div className="modal">
-      <h4>제목</h4>
+      <h4>{text}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button onClick={() => setText('여자 코트 추천')}>글수정</button>
     </div>
   );
 }

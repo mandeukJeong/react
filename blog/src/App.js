@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   let [title, setTitle] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬독학']);
   let [good, setGood] = useState(0);
+  let [modal, setModal] = useState(false);
 
   return (
     <div className="App">
@@ -29,10 +30,14 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
-        <h4>{title[2]}</h4>
+        <h4 onClick={() => {
+          setModal((prevState) => {
+            return !prevState;
+          });
+        }}>{title[2]}</h4>
         <p>2월 17일 발행</p>
       </div>
-      <Modal />
+      {modal === true ? <Modal /> : null}
     </div>
   );
 }

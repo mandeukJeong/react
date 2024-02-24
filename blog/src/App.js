@@ -8,6 +8,7 @@ function App() {
     '파이썬독학',
   ]);
   let [modal, setModal] = useState(false);
+  let [index, setIndex] = useState(null);
 
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
                 setModal((prevState) => {
                   return !prevState;
                 });
+                setIndex(index);
               }}
             >
               {item}
@@ -30,19 +32,17 @@ function App() {
           </div>
         );
       })}
-      {modal === true ? <Modal title={title} /> : null}
+      {modal === true ? <Modal index={index} title={title} /> : null}
     </div>
   );
 }
 
 function Modal(props) {
-  const [text, setText] = useState(props.title[0]);
   return (
     <div className="modal">
-      <h4>{text}</h4>
+      <h4>{props.title[props.index]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
-      <button onClick={() => setText('여자 코트 추천')}>글수정</button>
     </div>
   );
 }

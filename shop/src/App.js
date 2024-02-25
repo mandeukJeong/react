@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import data from './data';
+import ShopList from './ShopList';
 // import bg from './img/bg.png';
 
 function App() {
@@ -24,33 +25,9 @@ function App() {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes1.jpg"
-              alt="신발1"
-              width="80%"
-            />
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price}</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes2.jpg"
-              alt="신발2"
-              width="80%"
-            />
-            <h4>{shoes[1].title}</h4>
-            <p>{shoes[1].price}</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes3.jpg"
-              alt="신발3"
-              width="80%"
-            />
-            <h4>{shoes[2].title}</h4>
-            <p>{shoes[2].price}</p>
-          </div>
+          {shoes.map((item, index) => {
+            return <ShopList key={index} shoes={item} />;
+          })}
         </div>
       </div>
     </div>

@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 const ShopDetail = (props) => {
   let { id } = useParams();
-
   return (
     <div className="container">
       <div className="row">
@@ -19,9 +18,11 @@ const ShopDetail = (props) => {
           />
         </div>
         <div className="col-md-6">
-          <h4 className="pt-5">{props.shoes[id].title}</h4>
-          <p>{props.shoes[id].content}</p>
-          <p>{props.shoes[id].price}원</p>
+          <h4 className="pt-5">
+            {props.shoes.find((item) => String(item.id) === id).title}
+          </h4>
+          <p>{props.shoes.find((item) => String(item.id) === id).content}</p>
+          <p>{props.shoes.find((item) => String(item.id) === id).price}원</p>
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>

@@ -3,6 +3,7 @@ import './App.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import data from './data';
 import ShopList from './ShopList';
+import { Routes, Route, Link } from 'react-router-dom';
 // import bg from './img/bg.png';
 
 function App() {
@@ -20,16 +21,30 @@ function App() {
         </Container>
       </Navbar>
 
-      {/* <div className="main-bg" style={{ backgroundImage: `url(${bg})` }}></div> */}
-      <div className="main-bg"></div>
+      {/* <Link to="/">홈</Link>
+      <Link to="/detail">상세페이지</Link> */}
 
-      <div className="container">
-        <div className="row">
-          {shoes.map((item, index) => {
-            return <ShopList key={index} shoes={item} />;
-          })}
-        </div>
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <div className="main-bg"></div>
+
+              <div className="container">
+                <div className="row">
+                  {shoes.map((item, index) => {
+                    return <ShopList key={index} shoes={item} />;
+                  })}
+                </div>
+              </div>
+            </>
+          }
+        />
+        <Route path="/detail" element={<div>상세페이지임</div>} />
+      </Routes>
+
+      {/* <div className="main-bg" style={{ backgroundImage: `url(${bg})` }}></div> */}
     </div>
   );
 }

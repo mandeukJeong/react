@@ -3,6 +3,7 @@ import './App.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import data from './data';
 import ShopList from './ShopList';
+import ShopDetail from './ShopDetail';
 import { Routes, Route, Link } from 'react-router-dom';
 // import bg from './img/bg.png';
 
@@ -41,7 +42,7 @@ function App() {
             </>
           }
         />
-        <Route path="/detail" element={<div>상세페이지임</div>} />
+        <Route path="/detail" element={<ShopDetail />} />
       </Routes>
 
       {/* <div className="main-bg" style={{ backgroundImage: `url(${bg})` }}></div> */}

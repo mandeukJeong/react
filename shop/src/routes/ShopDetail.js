@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 const ShopDetail = (props) => {
   let { id } = useParams();
   const [isRender, setIsRender] = useState(true);
+  const [userNum, setUserNum] = useState('');
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -15,11 +17,25 @@ const ShopDetail = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!/^[0-9]*$/.test(userNum)) {
+      setAlert(true);
+    } else {
+      setAlert(false);
+    }
+  }, [userNum]);
+
   return (
     <div className="container">
       {isRender && (
         <div className="alert alert-warning">2초이내 구매시 할인</div>
       )}
+      {alert && <p style={{ color: 'red' }}>그러지마세요</p>}
+      <input
+        type="text"
+        value={userNum}
+        onChange={(e) => setUserNum(e.target.value)}
+      />
       <div className="row">
         <div className="col-md-6">
           <img

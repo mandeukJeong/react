@@ -6,11 +6,13 @@ const ShopDetail = (props) => {
   let { id } = useParams();
   const [isRender, setIsRender] = useState(true);
   let [tab, setTab] = useState(0);
+  const [end, setEnd] = useState('');
 
   useEffect(() => {
     let timer = setTimeout(() => {
       setIsRender(false);
     }, 2000);
+    setEnd('end');
 
     return () => {
       clearTimeout(timer);
@@ -18,7 +20,7 @@ const ShopDetail = (props) => {
   }, []);
 
   return (
-    <div className="container">
+    <div className={`container start ${end}`}>
       {isRender && (
         <div className="alert alert-warning">2초이내 구매시 할인</div>
       )}
@@ -67,7 +69,24 @@ const ShopDetail = (props) => {
 };
 
 const TabContent = ({ tab }) => {
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab];
+  let [fade, setFade] = useState('');
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setFade('end');
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      setFade('');
+    };
+  }, [tab]);
+
+  return (
+    <div className={`start ${fade}`}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+    </div>
+  );
 };
 
 export default ShopDetail;

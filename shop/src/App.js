@@ -4,6 +4,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import data from './data';
 import ShopList from './ShopList';
 import ShopDetail from './routes/ShopDetail';
+import Cart from './routes/Cart';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -85,6 +86,7 @@ function App() {
             </Context1.Provider>
           }
         />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );

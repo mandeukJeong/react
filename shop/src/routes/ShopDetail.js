@@ -6,10 +6,14 @@ const ShopDetail = (props) => {
   const [isRender, setIsRender] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       setIsRender(false);
     }, 2000);
-  });
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <div className="container">

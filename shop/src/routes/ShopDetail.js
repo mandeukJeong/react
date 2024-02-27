@@ -15,6 +15,7 @@ const ShopDetail = (props) => {
     setEnd('end');
 
     return () => {
+      setEnd('');
       clearTimeout(timer);
     };
   }, []);

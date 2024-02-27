@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 const ShopDetail = (props) => {
   let { id } = useParams();
   const [isRender, setIsRender] = useState(true);
-  const [userNum, setUserNum] = useState('');
-  const [alert, setAlert] = useState(false);
+  let [tab, setTab] = useState(0);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -17,25 +17,11 @@ const ShopDetail = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (!/^[0-9]*$/.test(userNum)) {
-      setAlert(true);
-    } else {
-      setAlert(false);
-    }
-  }, [userNum]);
-
   return (
     <div className="container">
       {isRender && (
         <div className="alert alert-warning">2초이내 구매시 할인</div>
       )}
-      {alert && <p style={{ color: 'red' }}>그러지마세요</p>}
-      <input
-        type="text"
-        value={userNum}
-        onChange={(e) => setUserNum(e.target.value)}
-      />
       <div className="row">
         <div className="col-md-6">
           <img
@@ -57,8 +43,31 @@ const ShopDetail = (props) => {
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>
+
+      <Nav variant="tabs" defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link eventKey="link0" onClick={() => setTab(0)}>
+            버튼0
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link1" onClick={() => setTab(1)}>
+            버튼1
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link2" onClick={() => setTab(2)}>
+            버튼2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TabContent tab={tab} />
     </div>
   );
+};
+
+const TabContent = ({ tab }) => {
+  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab];
 };
 
 export default ShopDetail;

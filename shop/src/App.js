@@ -10,6 +10,8 @@ import axios from 'axios';
 
 function App() {
   let [shoes, setShoes] = useState(data);
+  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
 
   return (
@@ -40,20 +42,34 @@ function App() {
               </div>
               <button
                 onClick={() => {
-                  axios
-                    .get('https://codingapple1.github.io/shop/data2.json')
-                    .then((response) => {
-                      setShoes((prevState) => {
-                        return [...prevState, ...response.data];
+                  setLoading(true);
+                  if (count < 2) {
+                    axios
+                      .get(
+                        `https://codingapple1.github.io/shop/data${
+                          count + 2
+                        }.json`
+                      )
+                      .then((response) => {
+                        setLoading(false);
+                        setShoes((prevState) => {
+                          return [...prevState, ...response.data];
+                        });
+                        setCount((prevState) => prevState + 1);
+                      })
+                      .catch((e) => {
+                        setLoading(false);
+                        console.log(e);
                       });
-                    })
-                    .catch((e) => {
-                      console.log(e);
-                    });
+                  } else {
+                    setLoading(false);
+                    alert('상품이 더 이상 존재하지 않습니다.');
+                  }
                 }}
               >
                 버튼
               </button>
+              {loading && <p>로딩중입니다...</p>}
             </>
           }
         />

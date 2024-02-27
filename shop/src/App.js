@@ -5,6 +5,7 @@ import data from './data';
 import ShopList from './ShopList';
 import ShopDetail from './routes/ShopDetail';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 // import bg from './img/bg.png';
 
 function App() {
@@ -37,6 +38,22 @@ function App() {
                   })}
                 </div>
               </div>
+              <button
+                onClick={() => {
+                  axios
+                    .get('https://codingapple1.github.io/shop/data2.json')
+                    .then((response) => {
+                      setShoes((prevState) => {
+                        return [...prevState, ...response.data];
+                      });
+                    })
+                    .catch((e) => {
+                      console.log(e);
+                    });
+                }}
+              >
+                버튼
+              </button>
             </>
           }
         />

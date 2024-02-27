@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import './App.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import data from './data';
@@ -6,10 +6,14 @@ import ShopList from './ShopList';
 import ShopDetail from './routes/ShopDetail';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 // import bg from './img/bg.png';
+
+export let Context1 = createContext();
 
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [remain, setRemain] = useState([10, 11, 12]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
@@ -73,7 +77,14 @@ function App() {
             </>
           }
         />
-        <Route path="/detail/:id" element={<ShopDetail shoes={shoes} />} />
+        <Route
+          path="/detail/:id"
+          element={
+            <Context1.Provider value={{ remain }}>
+              <ShopDetail shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
       </Routes>
     </div>
   );

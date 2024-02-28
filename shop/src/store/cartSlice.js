@@ -18,8 +18,15 @@ const cart = createSlice({
         state.push({ id: newItem.id, name: newItem.content, count: 1 });
       }
     },
+    deleteItem(state, { payload }) {
+      if (state.find((item) => item.id === payload).count === 1) {
+        return state.filter((item) => !(item.id === payload));
+      } else {
+        state.find((item) => item.id === payload).count -= 1;
+      }
+    },
   },
 });
 
-export const { increase, addItem } = cart.actions;
+export const { increase, addItem, deleteItem } = cart.actions;
 export default cart;

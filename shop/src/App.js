@@ -13,6 +13,11 @@ import axios from 'axios';
 export let Context1 = createContext();
 
 function App() {
+  let obj = { name: 'kim' };
+  localStorage.setItem('data', JSON.stringify(obj));
+  let result = JSON.parse(localStorage.getItem('data'));
+  console.log(result.name);
+
   let [shoes, setShoes] = useState(data);
   let [remain, setRemain] = useState([10, 11, 12]);
   const [count, setCount] = useState(0);

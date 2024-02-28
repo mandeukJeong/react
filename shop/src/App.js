@@ -1,10 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, Suspense, lazy, useState } from 'react';
 import './App.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import data from './data';
 import ShopList from './ShopList';
-import ShopDetail from './routes/ShopDetail';
-import Cart from './routes/Cart';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from 'react-query';
@@ -12,6 +10,8 @@ import { useQuery } from 'react-query';
 // import bg from './img/bg.png';
 
 export let Context1 = createContext();
+const Cart = lazy(() => import('./routes/Cart'));
+const ShopDetail = lazy(() => import('./routes/ShopDetail'));
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -94,9 +94,11 @@ function App() {
         <Route
           path="/detail/:id"
           element={
-            <Context1.Provider value={{ remain }}>
-              <ShopDetail shoes={shoes} />
-            </Context1.Provider>
+            <Suspense fallback={<div>로딩중임</div>}>
+              <Context1.Provider value={{ remain }}>
+                <ShopDetail shoes={shoes} />
+              </Context1.Provider>
+            </Suspense>
           }
         />
         <Route path="/cart" element={<Cart />} />

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 const Cart = () => {
   let a = useSelector((state) => state.user);
+  let cart = useSelector((state) => state.cart);
   console.log(a);
 
   return (
@@ -18,12 +19,14 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>안녕</td>
-            <td>안녕</td>
-            <td>안녕</td>
-          </tr>
+          {cart.map((item, index) => (
+            <tr key={index}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.count}</td>
+              <td>안녕</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>

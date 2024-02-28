@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName, changeAge } from '../store/userSlice';
+import { changeAge } from '../store/userSlice';
+import { increase } from '../store/cartSlice';
 
 const Cart = () => {
   let user = useSelector((state) => state.user);
@@ -32,7 +33,7 @@ const Cart = () => {
               <td>
                 <button
                   onClick={() => {
-                    dispatch(changeName());
+                    dispatch(increase({ id: item.id }));
                   }}
                 >
                   +

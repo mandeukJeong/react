@@ -2,12 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { Context1 } from '../App';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../store/cartSlice';
 
 const ShopDetail = (props) => {
   let { id } = useParams();
   const [isRender, setIsRender] = useState(true);
   let [tab, setTab] = useState(0);
   const [end, setEnd] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -44,7 +47,18 @@ const ShopDetail = (props) => {
           </h4>
           <p>{props.shoes.find((item) => String(item.id) === id).content}</p>
           <p>{props.shoes.find((item) => String(item.id) === id).price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() =>
+              dispatch(
+                addItem({
+                  newItem: props.shoes.find((item) => String(item.id) === id),
+                })
+              )
+            }
+          >
+            주문하기
+          </button>
         </div>
       </div>
 

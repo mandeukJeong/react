@@ -5,6 +5,7 @@ import data from './data';
 import ShopList from './ShopList';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Transition from './Transition';
 import { useQuery } from 'react-query';
 
 // import bg from './img/bg.png';
@@ -102,6 +103,7 @@ function App() {
           }
         />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/transition" element={<Transition />} />
       </Routes>
     </div>
   );

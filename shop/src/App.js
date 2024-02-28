@@ -7,22 +7,27 @@ import ShopDetail from './routes/ShopDetail';
 import Cart from './routes/Cart';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useQuery } from 'react-query';
 
 // import bg from './img/bg.png';
 
 export let Context1 = createContext();
 
 function App() {
-  let obj = { name: 'kim' };
-  localStorage.setItem('data', JSON.stringify(obj));
-  let result = JSON.parse(localStorage.getItem('data'));
-  console.log(result.name);
-
   let [shoes, setShoes] = useState(data);
   let [remain, setRemain] = useState([10, 11, 12]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
+
+  let result = useQuery(
+    '',
+    () =>
+      axios.get('https://codingapple1.github.io/userdata.json').then((res) => {
+        return res.data;
+      }),
+    { staleTime: 2000 }
+  );
 
   return (
     <div className="App">
@@ -32,6 +37,9 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate('/detail')}>Detail</Nav.Link>
+          </Nav>
+          <Nav className="ms-auto">
+            {result.isLoading ? '로딩중입니다.' : result.data.name}
           </Nav>
         </Container>
       </Navbar>
